@@ -40,9 +40,9 @@ defmodule Hexoku.Mixfile do
     defp package do
     [
       contributors: ["Jón Grétar Borgþórsson"],
-      license: ["CDDL"],
+      license: ["MIT"],
       links: [
-        "Documentation": "jongretar.github.io/Hexoku",
+        "Documentation": "http://jongretar.github.io/Hexoku",
         "GitHub": "https://github.com/JonGretar/Hexoku",
         "Issues": "https://github.com/JonGretar/Hexoku/issues"
       ]
