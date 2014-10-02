@@ -1,6 +1,7 @@
 /_build
 /deps
 /docs
+/tmp
 erl_crash.dump
 LocalNotes.md
 *.ez
