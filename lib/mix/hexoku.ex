@@ -23,6 +23,7 @@ defmodule Mix.Tasks.Hexoku do
 
     mix hexoku.app                                # Get application info
     mix hexoku.config                             # List configuration variables
+    mix hexoku.log [--tail]                       # Show applications log
     mix hexoku --help                             # This help
     """
   end
