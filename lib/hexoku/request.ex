@@ -1,4 +1,5 @@
 defmodule Hexoku.Request do
+	require HTTPoison.Base
 	use HTTPoison.Base
 	@moduledoc """
 	Make generic Heroku HTTP requests.
@@ -30,12 +31,12 @@ defmodule Hexoku.Request do
 
 	@spec post(Hexoku.Client.t, binary, map) :: Hexoku.Response.t
 	def post(client, path, body) do
-		basic_request(client, :post, path, JSEX.encode!(body))
+		basic_request(client, :post, path, body)
 	end
 
 	@spec put(Hexoku.Client.t, binary, map) :: Hexoku.Response.t
 	def put(client, path, body) do
-		basic_request(client, :put, path, JSEX.encode!(body))
+		basic_request(client, :put, path, body)
 	end
 
 	@spec patch(Hexoku.Client.t, binary, map) :: Hexoku.Response.t
