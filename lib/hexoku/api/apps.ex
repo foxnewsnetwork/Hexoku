@@ -16,6 +16,24 @@ defmodule Hexoku.API.Apps do
 		Request.get(client, "/apps/#{app}")
 	end
 
-	# TODO: Finish Delete and Create
+	@spec create(Hexoku.Client.t, binary, binary, binary) :: Hexoku.Response.t
+	def create(client, name, region, stack \\ "cedar") do
+		Request.post(client, "/apps", %{
+			name: name,
+			stack: stack,
+			region: region
+		})
+	end
+
+	@spec create(Hexoku.Client.t, map) :: Hexoku.Response.t
+	def create(client, body) do
+		Request.post(client, "/apps", body)
+	end
+
+	@spec delete(Hexoku.Client.t, binary) :: Hexoku.Response.t
+	def delete(client, app) do
+		Request.delete(client, "/apps/#{app}")
+	end
+
 
 end
