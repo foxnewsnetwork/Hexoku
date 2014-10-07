@@ -86,6 +86,10 @@ defmodule Hexoku do
 		@type t :: %__MODULE__{status: integer, body: any}
 	end
 
+	def start() do
+		:application.ensure_all_started(:hexoku)
+	end
+
 	@doc """
 	Create a Hexoku client using username and password.
 

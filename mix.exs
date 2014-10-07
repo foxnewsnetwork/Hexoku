@@ -5,7 +5,7 @@ defmodule Hexoku.Mixfile do
     [
       app: :hexoku,
       version: "0.0.1",
-      elixir: "~> 1.0.0",
+      elixir: "~> 1.0.1",
       deps: deps,
       description: description,
       package: package,
