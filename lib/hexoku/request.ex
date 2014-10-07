@@ -8,8 +8,8 @@ defmodule Hexoku.Request do
 
 	## Examples:
 
-	client = Hexoku.toolbelt
-	client |> Hexoku.Request.get("/apps")
+		client = Hexoku.toolbelt
+		client |> Hexoku.Request.get("/apps")
 
 	"""
 

@@ -1,5 +1,12 @@
 defmodule Mix.Tasks.Hexoku do
   use Mix.Task
+  @moduledoc """
+  
+  mix hexoku.app                                # Get application info
+  mix hexoku.config                             # List configuration variables
+  mix hexoku.log [--tail]                       # Show applications log
+  mix hexoku --help                             # This help
+  """
 
   def app_name do
     Mix.Project.config[:heroku_app] || Mix.Project.config[:app]

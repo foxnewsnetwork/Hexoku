@@ -2,6 +2,7 @@ defmodule Mix.Tasks.Hexoku.Config do
   use Mix.Task
   alias Hexoku.API.Config
   alias Hexoku.Response
+  @moduledoc false
 
   @shortdoc "List Heroku configuration vars"
   @recursive true

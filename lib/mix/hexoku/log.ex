@@ -1,6 +1,7 @@
 defmodule Mix.Tasks.Hexoku.Log do
 	use Mix.Task
 	alias Hexoku.API.LogSession
+	@moduledoc false
 
 	@shortdoc "Get Heroku apps log. [--tail]"
 	@recursive true

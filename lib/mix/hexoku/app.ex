@@ -2,6 +2,7 @@ defmodule Mix.Tasks.Hexoku.App do
 	use Mix.Task
 	alias Hexoku.API.Apps
 	alias Hexoku.Response
+	@moduledoc false
 
 	@shortdoc "Get application info"
 	@recursive true
