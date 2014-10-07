@@ -11,7 +11,7 @@ defmodule Mix.Tasks.Hexoku.Config do
   """
   def run([]) do
     client = Hexoku.toolbelt
-    %Response{status: 200, body: config} = client |> Config.get(Mix.Tasks.Hexoku.app_name)
+    %Response{status: 200, body: config} = client |> Config.list(Mix.Tasks.Hexoku.app_name)
     Enum.each(config, fn {k, v} -> Mix.shell.info("#{k} = #{v}") end)
   end
 
