@@ -21,7 +21,8 @@ defmodule Mix.Tasks.Hexoku do
     Mix.shell.info """
     Help:
 
-    mix hexoku.config                             # List vars
+    mix hexoku.app                                # Get application info
+    mix hexoku.config                             # List configuration variables
     mix hexoku --help                             # This help
     """
   end
