@@ -42,7 +42,7 @@ defmodule Hexoku.Mixfile do
       contributors: ["Jón Grétar Borgþórsson"],
       licenses: ["MIT"],
       links: %{
-        "Documentation": "http://jongretar.github.io/Hexoku",
+        "Documentation": "http://hexdocs.pm/hexoku",
         "GitHub": "https://github.com/JonGretar/Hexoku",
         "Issues": "https://github.com/JonGretar/Hexoku/issues"
       }
