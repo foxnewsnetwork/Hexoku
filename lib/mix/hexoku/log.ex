@@ -1,25 +1,32 @@
 defmodule Mix.Tasks.Hexoku.Log do
 	use Mix.Task
+	alias Mix.Tasks.Hexoku, as: H
 	alias Hexoku.API.LogSession
 	@moduledoc false
 
-	@shortdoc "Get Heroku apps log. [--tail]"
+	@shortdoc "Get Heroku apps log. [--tail] [--app APP]"
 	@recursive true
+	@switches [
+		app: :string,
+		tail: :boolean
+	]
 
-	@doc """
-	Get Heroku apps log.
-	"""
-	def run([]) do
-		client = Hexoku.toolbelt
-		Mix.shell.info(client |> LogSession.get(Mix.Tasks.Hexoku.app_name))
+	def run(argv) do
+		{options, _} = H.parse_options(argv, @switches)
+		run(Keyword.get(options, :tail, false), options)
 	end
-	def run(["--tail"]) do
+
+	defp run(true, options) do
 		client = Hexoku.toolbelt
 		parent = self()
-		client |> LogSession.stream(Mix.Tasks.Hexoku.app_name, fn (chunk) ->
+		client |> LogSession.stream(Keyword.get(options, :app), fn (chunk) ->
 			send(parent, chunk)
 		end)
 		tail()
+	end
+	defp run(_, options) do
+		client = Hexoku.toolbelt
+		Mix.shell.info(client |> LogSession.get(Keyword.get(options, :app)))
 	end
 
 	defp tail() do

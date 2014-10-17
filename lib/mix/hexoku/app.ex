@@ -1,18 +1,20 @@
 defmodule Mix.Tasks.Hexoku.App do
 	use Mix.Task
+	alias Mix.Tasks.Hexoku, as: H
 	alias Hexoku.API.Apps
 	alias Hexoku.Response
 	@moduledoc false
 
-	@shortdoc "Get application info"
+	@shortdoc "Get application info [--app APP]"
 	@recursive true
+	@switches [
+		app: :string
+	]
 
-	@doc """
-	List config vars
-	"""
-	def run([]) do
+	def run(argv) do
+		{options, _} = H.parse_options(argv, @switches)
 		client = Hexoku.toolbelt
-		%Response{status: 200, body: info} = client |> Apps.info(Mix.Tasks.Hexoku.app_name)
+		%Response{status: 200, body: info} = client |> Apps.info(Keyword.get(options, :app))
 		Mix.shell.info("App Name:       #{info[:name]}")
 		Mix.shell.info("Region:         #{info[:region][:name]}")
 		Mix.shell.info("Stack:          #{info[:stack][:name]}")

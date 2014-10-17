@@ -2,15 +2,26 @@ defmodule Mix.Tasks.Hexoku do
   use Mix.Task
   @moduledoc """
 
-  mix hexoku.app                                # Get application info
-  mix hexoku.config                             # List configuration variables
-  mix hexoku.log [--tail]                       # Show applications log
-  mix hexoku --help                             # This help
+  ## Heroku Mix Tasks:
+
+    mix hexoku.app  [--app APP]                   # Get application info
+    mix hexoku.config [--app APP]                 # List configuration variables
+    mix hexoku.log [--app APP] [--tail]           # Show applications log
+    mix hexoku --help                             # This help
   """
   @shortdoc "List Hexoku tasks"
 
-  def app_name do
-    Mix.Project.config[:heroku_app] || Mix.Project.config[:app]
+  def parse_options(argv, switches) do
+    {parsed, argv, errors} = OptionParser.parse(argv, strict: switches)
+    if Keyword.get(parsed, :app, false) do
+      Keyword.put parsed, :app, Mix.Project.config[:heroku_app] || Mix.Project.config[:app]
+    end
+    if length(errors) > 0 do
+      for {flag, _} <- errors, do: Mix.shell.error("Error with flag "<>flag)
+      System.halt(1)
+    else
+      {parsed, argv}
+    end
   end
 
   def run([]) do
@@ -25,9 +36,9 @@ defmodule Mix.Tasks.Hexoku do
     Mix.shell.info """
     Help:
 
-    mix hexoku.app                                # Get application info
-    mix hexoku.config                             # List configuration variables
-    mix hexoku.log [--tail]                       # Show applications log
+    mix hexoku.app  [--app APP]                   # Get application info
+    mix hexoku.config [--app APP]                 # List configuration variables
+    mix hexoku.log [--app APP] [--tail]           # Show applications log
     mix hexoku --help                             # This help
     """
   end
