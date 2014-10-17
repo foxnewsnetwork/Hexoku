@@ -16,7 +16,8 @@ defmodule Hexoku do
 
 	## Mix Support
 
-	Hexoku adds some common Heroku commands to your Mix. It relies on [Heroku Toolbet](toolbelt.heroku.com) being installed and logged in.
+	Hexoku adds some common Heroku commands to your Mix. It relies on [Heroku Toolbet](toolbelt.heroku.com) being
+	installed and logged in.
 
 	The application name is read from the heroku_app key in your `mix.exs` files project.
 	If that is not defined it falls back to the :app key.
@@ -117,7 +118,7 @@ defmodule Hexoku do
 	## Examples:
 
 		client = Hexoku.toolbelt
-		client = Hexoku.toolbelt"hk")
+		client = Hexoku.toolbelt("hk")
 	"""
 	@spec toolbelt(binary, binary) :: Hexoku.Client.t
 	def toolbelt(command \\ "heroku", argument \\ "auth:token") do
