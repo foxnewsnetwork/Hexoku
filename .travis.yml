@@ -12,3 +12,9 @@ before_script:
 script:
   - mix test --include integration
 notifications:
+  webhooks:
+    urls:
+      - secure: "PidjcEJqwtbBrlfAdpFBgbG6t8SbtA6vZC8Yax98AUCe2aO3wNJzaxXBlpyf8dsXtMcjHjPdoGIGPCfdVii5XMiTfoQdAdCb43ym8kzkWnzMiQYPVC7byWdhateYGgv9u4j6AXkJN59efeiHvu+dXXIWnpCnAS6ux28Y3qk1NSY="
+    on_success: change
+    on_failure: always
+    on_start: false
