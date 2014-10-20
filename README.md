@@ -1,5 +1,6 @@
 Hexoku
 ======
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/JonGretar/Hexoku?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Basic API support and MIX tasks for Heroku support.
 
 For full API docs please visit [http://jongretar.com/Hexoku/](http://jongretar.com/Hexoku/).
