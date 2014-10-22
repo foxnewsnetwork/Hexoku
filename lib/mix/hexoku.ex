@@ -13,8 +13,9 @@ defmodule Mix.Tasks.Hexoku do
 
   def parse_options(argv, switches) do
     {parsed, argv, errors} = OptionParser.parse(argv, strict: switches)
-    if Keyword.get(parsed, :app, false) do
-      Keyword.put parsed, :app, Mix.Project.config[:heroku_app] || Mix.Project.config[:app]
+    unless Keyword.get(parsed, :app, false) do
+      app = Mix.Project.config[:heroku_app] || Mix.Project.config[:app]
+      parsed = Keyword.put(parsed, :app, app)
     end
     if length(errors) > 0 do
       for {flag, _} <- errors, do: Mix.shell.error("Error with flag "<>flag)
