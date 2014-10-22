@@ -4,7 +4,7 @@ defmodule Hexoku.Mixfile do
   def project do
     [
       app: :hexoku,
-      version: "0.0.2",
+      version: "0.0.3",
       elixir: "~> 1.0.1",
       deps: deps,
       description: description,
