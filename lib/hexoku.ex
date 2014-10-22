@@ -44,13 +44,16 @@ defmodule Hexoku do
 		defstruct auth: nil
 		@type auth :: Hexoku.Client.Auth.OAuth2.t | Hexoku.Client.Auth.Basic.t
 		@type t :: %__MODULE__{auth: auth}
+		@moduledoc false
 
 		defmodule Auth do
+			@moduledoc false
 			defprotocol Authenticate do
 				def auth_header(auth)
 			end
 
 			defmodule Basic do
+				@moduledoc false
 				defstruct username: nil, password: nil
 				@type t :: %__MODULE__{username: binary, password: binary}
 			end
@@ -59,6 +62,7 @@ defmodule Hexoku do
 			end
 
 			defmodule OAuth2 do
+				@moduledoc false
 				defstruct token: nil
 				@type t :: %__MODULE__{token: binary}
 			end

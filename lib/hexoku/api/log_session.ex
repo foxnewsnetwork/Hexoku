@@ -6,8 +6,8 @@ defmodule Hexoku.API.LogSession do
 	For more info read the [Heroku API Reference](https://devcenter.heroku.com/articles/platform-api-reference#log-session)
 	"""
 
-	@spec get(Hexoku.Client.t, binary) :: binary | :error
-	def get(client, app) do
+	@spec get(Hexoku.Client.t, binary, Map.t) :: binary | :error
+	def get(client, app, options \\ %{}) do
 		%Hexoku.Response{status: 201, body: body} = Request.post(client, "/apps/#{app}/log-sessions", %{})
 		sender = self()
 		pid = spawn(fn -> collect_stream(sender, body[:logplex_url]) end)
@@ -17,8 +17,8 @@ defmodule Hexoku.API.LogSession do
 		end
 	end
 
-	@spec stream(Hexoku.Client.t, binary, (binary | :done -> any)) :: :ok
-	def stream(client, app, fun) do
+	@spec stream(Hexoku.Client.t, binary, Map.t, (binary | :done -> any)) :: :ok
+	def stream(client, app, options \\ %{}, fun) do
 		%Hexoku.Response{status: 201, body: body} = Request.post(client, "/apps/#{app}/log-sessions", %{tail: true})
 		get_stream(body[:logplex_url], fun)
 	end

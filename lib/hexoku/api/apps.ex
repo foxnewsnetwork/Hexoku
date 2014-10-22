@@ -25,7 +25,7 @@ defmodule Hexoku.API.Apps do
 		})
 	end
 
-	@spec create(Hexoku.Client.t, map) :: Hexoku.Response.t
+	@spec create(Hexoku.Client.t, Map.t) :: Hexoku.Response.t
 	def create(client, body) do
 		Request.post(client, "/apps", body)
 	end

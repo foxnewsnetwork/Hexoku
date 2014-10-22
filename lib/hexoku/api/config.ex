@@ -6,12 +6,12 @@ defmodule Hexoku.API.Config do
 	For more info read the [Heroku API Reference](https://devcenter.heroku.com/articles/platform-api-reference#config-vars)
 	"""
 
-	@spec list(any, binary) :: any
+	@spec list(Hexoku.Client.t, binary) :: Hexoku.Response.t
 	def list(client, app) do
 		Request.get(client, "/apps/#{app}/config-vars")
 	end
 
-	@spec update(any, binary, map) :: any
+	@spec update(Hexoku.Client.t, binary, Map.t) :: Hexoku.Response.t
 	def update(client, app, body) do
 		Request.path(client, "/apps/#{app}/config-vars", body)
 	end
