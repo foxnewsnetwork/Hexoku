@@ -10,6 +10,7 @@ defmodule Hexoku.Mixfile do
       description: description,
       package: package,
       name: "Hexoku",
+      aliases: [install: ["compile", "archive.build", "archive.install --force"]],
       source_url: "https://github.com/JonGretar/Hexoku",
       homepage_url: "http://jongretar.github.io/Hexoku"
     ]
