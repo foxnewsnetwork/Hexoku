@@ -1,6 +1,9 @@
 defmodule Hexoku.Request do
 	require HTTPoison.Base
 	use HTTPoison.Base
+
+	defmodule RequestError, do: defexception status: nil, id: "undefined", message: ""
+
 	@moduledoc """
 	Make generic Heroku HTTP requests.
 
@@ -12,7 +15,6 @@ defmodule Hexoku.Request do
 		client |> Hexoku.Request.get("/apps")
 
 	"""
-
 	@default_headers [
 		{"User-Agent", "#{Mix.Project.config[:app]}/#{Mix.Project.config[:version]}"},
 		{"Accept", "application/vnd.heroku+json; version=3"},
@@ -20,36 +22,92 @@ defmodule Hexoku.Request do
 	]
 	## TODO: Find out if we can add parent Mix project and include in User-Agent.
 
+	@doc """
+		Perform a basic HTTP GET request to the API endpoint.
+
+		## Examples
+
+			Hexoku.toolbelt |> Hexoku.Request.get("/apps")
+
+	"""
 	@spec get(Hexoku.Client.t, binary) :: Hexoku.Response.t
 	def get(client, path) do
 		basic_request(client, :get, path, %{})
 	end
 
+	@doc """
+		Perform a basic HTTP HEAD request to the API endpoint.
+
+		## Examples
+
+			Hexoku.toolbelt |> Hexoku.Request.head("/apps")
+
+	"""
 	@spec head(Hexoku.Client.t, binary) :: Hexoku.Response.t
 	def head(client, path) do
 		basic_request(client, :head, path, %{})
 	end
 
-	@spec post(Hexoku.Client.t, binary, map) :: Hexoku.Response.t
+	@doc """
+		Perform a basic HTTP POST request to the API endpoint.
+
+		## Examples
+
+			Hexoku.toolbelt |> Hexoku.Request.post("/apps", %{foo: "bar"})
+
+	"""
+	@spec post(Hexoku.Client.t, binary, Map.t) :: Hexoku.Response.t
 	def post(client, path, body) do
 		basic_request(client, :post, path, body)
 	end
 
-	@spec put(Hexoku.Client.t, binary, map) :: Hexoku.Response.t
+	@doc """
+		Perform a basic HTTP PUT request to the API endpoint.
+
+		## Examples
+
+			Hexoku.toolbelt |> Hexoku.Request.put("/apps/myapp", %{foo: "bar"})
+
+	"""
+	@spec put(Hexoku.Client.t, binary, Map.t) :: Hexoku.Response.t
 	def put(client, path, body) do
 		basic_request(client, :put, path, body)
 	end
 
-	@spec patch(Hexoku.Client.t, binary, map) :: Hexoku.Response.t
+	@doc """
+		Perform a basic HTTP PATCH request to the API endpoint.
+
+		## Examples
+
+			Hexoku.toolbelt |> Hexoku.Request.put("/apps/myapp", %{foo: "bar"})
+
+	"""
+	@spec patch(Hexoku.Client.t, binary, Map.t) :: Hexoku.Response.t
 	def patch(client, path, body) do
 		basic_request(client, :patch, path, JSEX.encode!(body))
 	end
 
+	@doc """
+		Perform a basic HTTP DELETE request to the API endpoint.
+
+		## Examples
+
+			Hexoku.toolbelt |> Hexoku.Request.delete("/apps/myapp")
+
+	"""
 	@spec delete(Hexoku.Client.t, binary) :: Hexoku.Response.t
 	def delete(client, path) do
 		basic_request(client, :delete, path, "")
 	end
 
+	@doc """
+		Perform a basic HTTP OPTIONS request to the API endpoint.
+
+		## Examples
+
+			Hexoku.toolbelt |> Hexoku.Request.options("/apps/myapp")
+
+	"""
 	@spec options(Hexoku.Client.t, binary) :: Hexoku.Response.t
 	def options(client, path) do
 		basic_request(client, :options, path, "")
@@ -59,10 +117,14 @@ defmodule Hexoku.Request do
 	defp process_response_body(body), do: JSEX.decode!(body, [{:labels, :binary}])
 
 	defp response(status_code, _headers, body) do
-		%Hexoku.Response{
-			status: process_status_code(status_code),
-			body: process_response_body(body)
-		}
+		case process_status_code(status_code) do
+			code when code >= 400 -> raise_error(code, process_response_body(body))
+			_ -> process_response_body(body)
+		end
+	end
+
+	defp raise_error(code, body) do
+		raise RequestError, code: code, id: body["body"], message: body["message"]
 	end
 
 	defp basic_request(client, method, path, body) when is_map(body) do

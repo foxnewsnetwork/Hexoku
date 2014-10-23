@@ -6,10 +6,8 @@ defmodule Hexoku.API.Sources do
 	For more info read the [Heroku API Reference](https://devcenter.heroku.com/articles/platform-api-reference#source)
 	"""
 
-	@spec create(Hexoku.Client.t, binary, Map.t) :: Hexoku.Response.t
-	def create(client, app, body \\ %{}) do
-		Request.create(client, "/apps/#{app}/source", body)
-	end
+	@spec create(Hexoku.Client.t, binary, Map.t) :: Map.t
+	def create(client, app, body \\ %{}), do: Request.create(client, "/apps/#{app}/source", body)
 
 
 end

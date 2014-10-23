@@ -6,15 +6,11 @@ defmodule Hexoku.API.Slugs do
 	For more info read the [Heroku API Reference](https://devcenter.heroku.com/articles/platform-api-reference#slug)
 	"""
 
-	@spec info(Hexoku.Client.t, binary, binary) :: Hexoku.Response.t
-	def info(client, app, slug) do
-		Request.get(client, "/apps/#{app}/slugs/#{slug}")
-	end
+	@spec info(Hexoku.Client.t, binary, binary) :: Map.t
+	def info(client, app, slug), do: Request.get(client, "/apps/#{app}/slugs/#{slug}")
 
-	@spec create(Hexoku.Client.t, binary, Map.t) :: Hexoku.Response.t
-	def create(client, app, body) do
-		Request.post(client, "/apps/#{app}/slugs", body)
-	end
+	@spec create(Hexoku.Client.t, binary, Map.t) :: Map.t
+	def create(client, app, body), do: Request.post(client, "/apps/#{app}/slugs", body)
 
 
 end

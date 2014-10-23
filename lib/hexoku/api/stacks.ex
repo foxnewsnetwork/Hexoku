@@ -6,14 +6,10 @@ defmodule Hexoku.API.Stacks do
 	For more info read the [Heroku API Reference](https://devcenter.heroku.com/articles/platform-api-reference#stack)
 	"""
 
-	@spec list(Hexoku.Client.t) :: Hexoku.Response.t
-	def list(client) do
-		Request.get(client, "/stacks")
-	end
+	@spec list(Hexoku.Client.t) :: [Map.t]
+	def list(client), do: Request.get(client, "/stacks")
 
-	@spec info(Hexoku.Client.t, binary) :: Hexoku.Response.t
-	def info(client, stack) do
-		Request.get(client, "/stacks/#{stack}")
-	end
+	@spec info(Hexoku.Client.t, binary) :: Map.t
+	def info(client, stack), do: Request.get(client, "/stacks/#{stack}")
 
 end

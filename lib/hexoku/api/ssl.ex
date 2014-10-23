@@ -7,17 +7,13 @@ defmodule Hexoku.API.SSL do
 	For more info read the [Heroku API Reference](https://devcenter.heroku.com/articles/platform-api-reference#ssl-endpoint)
 	"""
 
-	@spec list(Hexoku.Client.t, binary) :: Hexoku.Response.t
-	def list(client, app) do
-		Request.get(client, "/apps/#{app}/ssl-endpoints")
-	end
+	@spec list(Hexoku.Client.t, binary) :: [Map.t]
+	def list(client, app), do: Request.get(client, "/apps/#{app}/ssl-endpoints")
 
-	@spec info(Hexoku.Client.t, binary, binary) :: Hexoku.Response.t
-	def info(client, app, endpoint) do
-		Request.get(client, "/apps/#{app}/ssl-endpoints/#{endpoint}")
-	end
+	@spec info(Hexoku.Client.t, binary, binary) :: Map.t
+	def info(client, app, endpoint), do: Request.get(client, "/apps/#{app}/ssl-endpoints/#{endpoint}")
 
-	@spec create(Hexoku.Client.t, binary, binary, boolean()) :: Hexoku.Response.t
+	@spec create(Hexoku.Client.t, binary, binary, boolean()) :: Map.t
 	def create(client, app, certificate_chain, private_key, preprocess \\ true) do
 		Request.post(client, "/apps/#{app}/ssl-endpoints", %{
 			preprocess: preprocess,
@@ -26,14 +22,10 @@ defmodule Hexoku.API.SSL do
 		})
 	end
 
-	@spec update(Hexoku.Client.t, binary, binary, Map.t) :: Hexoku.Response.t
-	def update(client, app, endpoint, body) do
-		Request.patch(client, "/apps/#{app}/ssl-endpoints/#{endpoint}", body)
-	end
+	@spec update(Hexoku.Client.t, binary, binary, Map.t) :: Map.t
+	def update(client, app, endpoint, body), do: Request.patch(client, "/apps/#{app}/ssl-endpoints/#{endpoint}", body)
 
-	@spec delete(Hexoku.Client.t, binary, binary) :: Hexoku.Response.t
-	def delete(client, app, endpoint) do
-		Request.delete(client, "/apps/#{app}/ssl-endpoints/#{endpoint}")
-	end
+	@spec delete(Hexoku.Client.t, binary, binary) :: Map.t
+	def delete(client, app, endpoint), do: Request.delete(client, "/apps/#{app}/ssl-endpoints/#{endpoint}")
 
 end

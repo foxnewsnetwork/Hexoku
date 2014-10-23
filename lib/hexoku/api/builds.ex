@@ -6,17 +6,13 @@ defmodule Hexoku.API.Builds do
 	For more info read the [Heroku API Reference](https://devcenter.heroku.com/articles/platform-api-reference#build)
 	"""
 
-	@spec list(Hexoku.Client.t, binary) :: Hexoku.Response.t
-	def list(client, app) do
-		Request.get(client, "/apps/#{app}/builds")
-	end
+	@spec list(Hexoku.Client.t, binary) :: [Map.t]
+	def list(client, app), do: Request.get(client, "/apps/#{app}/builds")
 
-	@spec info(Hexoku.Client.t, binary, binary) :: Hexoku.Response.t
-	def info(client, app, build) do
-		Request.get(client, "/apps/#{app}/builds/#{build}")
-	end
+	@spec info(Hexoku.Client.t, binary, binary) :: Map.t
+	def info(client, app, build), do: Request.get(client, "/apps/#{app}/builds/#{build}")
 
-	@spec create(Hexoku.Client.t, binary, binary, binary) :: Hexoku.Response.t
+	@spec create(Hexoku.Client.t, binary, binary, binary) :: Map.t
 	def create(client, app, url, version) do
 		Request.post(client, "/apps/#{app}/builds", %{source_blob: %{
 			url: url,

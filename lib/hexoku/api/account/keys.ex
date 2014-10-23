@@ -7,24 +7,16 @@ defmodule Hexoku.API.Account.Keys do
 	For more info read the [Heroku API Reference](https://devcenter.heroku.com/articles/platform-api-reference#key)
 	"""
 
-	@spec list(Hexoku.Client.t) :: Hexoku.Response.t
-	def list(client) do
-		Request.get(client, "/account/keys")
-	end
+	@spec list(Hexoku.Client.t) :: [Map.t]
+	def list(client), do: Request.get(client, "/account/keys")
 
-	@spec info(Hexoku.Client.t, binary) :: Hexoku.Response.t
-	def info(client, key_id_or_fingerprint) do
-		Request.get(client, "/account/keys/#{key_id_or_fingerprint}")
-	end
+	@spec info(Hexoku.Client.t, binary) :: Map.t
+	def info(client, key_id_or_fingerprint), do: Request.get(client, "/account/keys/#{key_id_or_fingerprint}")
 
-	@spec create(Hexoku.Client.t, binary) :: Hexoku.Response.t
-	def create(client, public_key) do
-		Request.post(client, "/account/keys", %{public_key: public_key})
-	end
+	@spec create(Hexoku.Client.t, binary) :: Map.t
+	def create(client, public_key), do: Request.post(client, "/account/keys", %{public_key: public_key})
 
-	@spec delete(Hexoku.Client.t, binary) :: Hexoku.Response.t
-	def delete(client, key_id_or_fingerprint) do
-		Request.delete(client, "/account/keys/#{key_id_or_fingerprint}")
-	end
+	@spec delete(Hexoku.Client.t, binary) :: Map.t
+	def delete(client, key_id_or_fingerprint), do: Request.delete(client, "/account/keys/#{key_id_or_fingerprint}")
 
 end

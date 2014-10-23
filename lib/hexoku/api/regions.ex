@@ -6,14 +6,10 @@ defmodule Hexoku.API.Regions do
 	For more info read the [Heroku API Reference](https://devcenter.heroku.com/articles/platform-api-reference#region)
 	"""
 
-	@spec list(Hexoku.Client.t) :: Hexoku.Response.t
-	def list(client) do
-		Request.get(client, "/regions")
-	end
+	@spec list(Hexoku.Client.t) :: [Map.t]
+	def list(client), do: Request.get(client, "/regions")
 
-	@spec info(Hexoku.Client.t, binary) :: Hexoku.Response.t
-	def info(client, region) do
-		Request.get(client, "/regions/#{region}")
-	end
+	@spec info(Hexoku.Client.t, binary) :: Map.t
+	def info(client, region), do: Request.get(client, "/regions/#{region}")
 
 end

@@ -74,11 +74,6 @@ defmodule Hexoku do
 
 	end
 
-	defmodule Response do
-		defstruct status: nil, body: nil
-		@type t :: %__MODULE__{status: integer, body: any}
-	end
-
 	def start() do
 		:application.ensure_all_started(:hexoku)
 	end

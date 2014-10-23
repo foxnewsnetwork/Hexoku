@@ -7,24 +7,16 @@ defmodule Hexoku.API.Addons.Available do
 	For more info read the [Heroku API Reference](https://devcenter.heroku.com/articles/platform-api-reference#plan)
 	"""
 
-	@spec list(Hexoku.Client.t) :: Hexoku.Response.t
-	def list(client) do
-		Request.get(client, "/addon-services")
-	end
+	@spec list(Hexoku.Client.t) :: [Map.t]
+	def list(client), do: Request.get(client, "/addon-services")
 
-	@spec info(Hexoku.Client.t, binary) :: Hexoku.Response.t
-	def info(client, service) do
-		Request.get(client, "/addon-services/#{service}")
-	end
+	@spec info(Hexoku.Client.t, binary) :: Map.t
+	def info(client, service), do: Request.get(client, "/addon-services/#{service}")
 
-	@spec plans(Hexoku.Client.t, binary) :: Hexoku.Response.t
-	def plans(client, service) do
-		Request.get(client, "/addon-services/#{service}/plans")
-	end
+	@spec plans(Hexoku.Client.t, binary) :: [Map.t]
+	def plans(client, service), do: Request.get(client, "/addon-services/#{service}/plans")
 
-	@spec info(Hexoku.Client.t, binary, binary) :: Hexoku.Response.t
-	def info(client, service, plan) do
-		Request.get(client, "/addon-services/#{service}/plans/#{plan}")
-	end
+	@spec info(Hexoku.Client.t, binary, binary) :: Map.t
+	def info(client, service, plan), do: Request.get(client, "/addon-services/#{service}/plans/#{plan}")
 
 end
