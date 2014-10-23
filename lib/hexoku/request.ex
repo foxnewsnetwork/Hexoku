@@ -14,7 +14,7 @@ defmodule Hexoku.Request do
 		defp response(status_code, _headers, body) do
 			case process_status_code(status_code) do
 				code when code >= 500 ->
-					raise Hexoku.Request.ServerError code: code, body: body
+					raise Hexoku.Request.ServerError, code: code, body: body
 				code when code >= 400 ->
 					raise_error(code, process_response_body(body))
 				_ -> process_response_body(body)
