@@ -8,9 +8,13 @@ defmodule Hexoku.API.LogSession do
 
 	@spec get(Hexoku.Client.t, binary, Map.t) :: binary | :error
 	def get(client, app, options \\ %{}) do
-		body = Request.post(client, "/apps/#{app}/log-sessions", %{})
+		# Bad things might happen if we tail here
+		options = Dict.drop(options, [:tail, "tail"])
+
+		body = Request.post(client, "/apps/#{app}/log-sessions", options)
 		sender = self()
 		pid = spawn(fn -> collect_stream(sender, body["logplex_url"]) end)
+
 		receive do
 			{^pid, chunk} -> chunk
 		after 6000 -> throw {:error, :timeout}
@@ -19,9 +23,10 @@ defmodule Hexoku.API.LogSession do
 
 	@spec stream(Hexoku.Client.t, binary, Map.t, (binary | :done -> any)) :: :ok
 	def stream(client, app, options \\ %{}, fun) do
-		body = Request.post(client, "/apps/#{app}/log-sessions", %{tail: true})
+		body = Request.post(client, "/apps/#{app}/log-sessions", Dict.put(options, :tail, true))
 		get_stream(body["logplex_url"], fun)
 	end
+
 
 	defp collect_stream(sender, url) do
 		me = self()
