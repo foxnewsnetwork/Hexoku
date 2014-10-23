@@ -14,10 +14,11 @@ defmodule Hexoku.Request do
 	"""
 
 	@default_headers [
-		{"User-Agent", "Hexouku"},
+		{"User-Agent", "#{Mix.Project.config[:app]}/#{Mix.Project.config[:version]}"},
 		{"Accept", "application/vnd.heroku+json; version=3"},
 		{"Content-Type", "application/json"}
 	]
+	## TODO: Find out if we can add parent Mix project and include in User-Agent.
 
 	@spec get(Hexoku.Client.t, binary) :: Hexoku.Response.t
 	def get(client, path) do
