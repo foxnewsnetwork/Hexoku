@@ -55,7 +55,7 @@ defmodule Hexoku.Request do
 	end
 
 	defp process_response_body(""), do: ""
-	defp process_response_body(body), do: JSEX.decode!(body, [{:labels, :atom}])
+	defp process_response_body(body), do: JSEX.decode!(body, [{:labels, :binary}])
 
 	defp response(status_code, _headers, body) do
 		%Hexoku.Response{

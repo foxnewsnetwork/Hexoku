@@ -10,7 +10,7 @@ defmodule Hexoku.API.LogSession do
 	def get(client, app, options \\ %{}) do
 		%Hexoku.Response{status: 201, body: body} = Request.post(client, "/apps/#{app}/log-sessions", %{})
 		sender = self()
-		pid = spawn(fn -> collect_stream(sender, body[:logplex_url]) end)
+		pid = spawn(fn -> collect_stream(sender, body["logplex_url"]) end)
 		receive do
 			{^pid, chunk} -> chunk
 		after 6000 -> throw {:error, :timeout}
@@ -20,7 +20,7 @@ defmodule Hexoku.API.LogSession do
 	@spec stream(Hexoku.Client.t, binary, Map.t, (binary | :done -> any)) :: :ok
 	def stream(client, app, options \\ %{}, fun) do
 		%Hexoku.Response{status: 201, body: body} = Request.post(client, "/apps/#{app}/log-sessions", %{tail: true})
-		get_stream(body[:logplex_url], fun)
+		get_stream(body["logplex_url"], fun)
 	end
 
 	defp collect_stream(sender, url) do
