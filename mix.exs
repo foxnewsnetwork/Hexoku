@@ -44,6 +44,7 @@ defmodule Hexoku.Mixfile do
       licenses: ["MIT"],
       links: %{
         "Documentation": "http://hexdocs.pm/hexoku",
+        "Gitter.im": "https://gitter.im/JonGretar/Hexoku",
         "GitHub": "https://github.com/JonGretar/Hexoku",
         "Issues": "https://github.com/JonGretar/Hexoku/issues"
       }
