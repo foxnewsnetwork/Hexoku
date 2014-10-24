@@ -4,13 +4,12 @@ defmodule Hexoku.Mixfile do
   def project do
     [
       app: :hexoku,
-      version: "0.0.3",
+      version: "0.1.0",
       elixir: "~> 1.0.1",
       deps: deps,
       description: description,
       package: package,
       name: "Hexoku",
-      aliases: [install: ["compile", "archive.build", "archive.install --force"]],
       source_url: "https://github.com/JonGretar/Hexoku",
       homepage_url: "http://jongretar.github.io/Hexoku"
     ]
