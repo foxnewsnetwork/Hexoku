@@ -1,6 +1,8 @@
 Hexoku [![Build Status](https://travis-ci.org/JonGretar/Hexoku.svg?branch=master)](https://travis-ci.org/JonGretar/Hexoku) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/JonGretar/Hexoku?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ======
 
+This version has tests, and a more recent dependency on httpoison
+
 Basic API support and MIX tasks for Heroku support.
 
 For full API docs please visit [http://jongretar.com/Hexoku/](http://jongretar.com/Hexoku/).

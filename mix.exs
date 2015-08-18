@@ -4,13 +4,13 @@ defmodule Hexoku.Mixfile do
   def project do
     [
       app: :hexoku,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.0.1",
       deps: deps,
       description: description,
       package: package,
       name: "Hexoku",
-      source_url: "https://github.com/JonGretar/Hexoku",
+      source_url: "https://github.com/foxnewsnetwork/Hexoku",
       homepage_url: "http://jongretar.github.io/Hexoku"
     ]
   end
@@ -27,7 +27,7 @@ defmodule Hexoku.Mixfile do
       {:earmark, ">= 0.0.0", only: :docs},
       {:reprise, "~> 0.3.0", only: :dev},
       {:jsex, "~> 2.0.0"},
-      {:httpoison, "~> 0.4"}
+      {:httpoison, "~> 0.7"}
     ]
   end
 
@@ -39,7 +39,7 @@ defmodule Hexoku.Mixfile do
 
     defp package do
     [
-      contributors: ["Jón Grétar Borgþórsson"],
+      contributors: ["Jón Grétar Borgþórsson", "Thomas Chen"],
       licenses: ["MIT"],
       links: %{
         "Documentation": "http://hexdocs.pm/hexoku",

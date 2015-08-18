@@ -88,7 +88,6 @@ defmodule Hexoku do
 	"""
 	@spec basic(binary, binary) :: Hexoku.Client.t
 	def basic(username, password) do
-		Hexoku.Request.start
 		%Hexoku.Client{
 			auth: %Hexoku.Client.Auth.Basic{username: username, password: password}
 		}
@@ -104,7 +103,6 @@ defmodule Hexoku do
 	"""
 	@spec oauth2(binary) :: Hexoku.Client.t
 	def oauth2(token) do
-		Hexoku.Request.start
 		%Hexoku.Client{
 			auth: %Hexoku.Client.Auth.OAuth2{token: token}
 		}
@@ -121,7 +119,6 @@ defmodule Hexoku do
 	"""
 	@spec toolbelt(binary, binary) :: Hexoku.Client.t
 	def toolbelt(command \\ "heroku", argument \\ "auth:token") do
-		Hexoku.Request.start
 		{token, 0} = System.cmd command, [argument]
 		%Hexoku.Client{
 			auth: %Hexoku.Client.Auth.OAuth2{token: String.strip(token)}

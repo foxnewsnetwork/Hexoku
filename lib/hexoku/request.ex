@@ -4,7 +4,6 @@ defmodule Hexoku.Request do
 	defmodule ServerError, do: defexception status: nil, message: ""
 
 	defmodule Requester do
-		require HTTPoison.Base
 		use HTTPoison.Base
 		@moduledoc false
 
